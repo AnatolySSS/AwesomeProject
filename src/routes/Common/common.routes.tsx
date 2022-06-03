@@ -16,16 +16,17 @@ export const CommonRoutes: FC = () => {
       <Tab.Screen
         name="Game"
         component={TournamentGameScreen}
-        options={{ title: 'Welcome' }}
+        options={{ title: 'Tournament' }}
       />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Welcome' }}
+        options={{ title: 'Home' }}
       />
       <Tab.Screen
         name="Profile"
         component={UnlimitedGameScreen}
+        options={{ title: 'Unlimited' }}
       />
     </Tab.Navigator>
   )

@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   useColorScheme,
-  View
+  View,
+  Dimensions
 } from 'react-native'
 import {
   Colors,
@@ -19,6 +20,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions
 } from 'react-native/Libraries/NewAppScreen'
+
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 export const HomeScreen: FC = () => {
 
@@ -30,6 +33,8 @@ export const HomeScreen: FC = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
+
+      <StatusBar hidden={true} />
 
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
