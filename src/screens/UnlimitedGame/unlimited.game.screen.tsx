@@ -33,7 +33,7 @@ export const UnlimitedGameScreen: FC = () => {
   const [y, setY] = useState(height / 2 - circleHeight / 2)
 
   const makeJump = () => {
-    setX(Math.floor(Math.random() * (width - circleWidth))),
+    setX(Math.floor(Math.random() * (width - circleWidth)))
     setY(Math.floor(Math.random() * (height - circleHeight - 100)))
     currentCount++
   }
@@ -48,9 +48,9 @@ export const UnlimitedGameScreen: FC = () => {
     <SafeAreaView style={styles.safeAreaView}>
       <StatusBar hidden={true} />
         <Text style={{textAlign:'center', fontSize: 40}}> { currentCount } </Text>
-        <Text style={{textAlign:'center', fontSize: 20}}> {'width: ' + width + ' height: ' + height + ' x: ' + x + ' y: ' + y} </Text>
+        {/* <Text style={{textAlign:'center', fontSize: 20}}> {'width: ' + width + ' height: ' + height + ' x: ' + x + ' y: ' + y} </Text> */}
         <Box style={styles.container} >
-          <TouchableOpacity style={[styles.box, newCoords]} onPress={makeJump} >
+          <TouchableOpacity style={[styles.box, newCoords]} onPressIn={makeJump} activeOpacity={1}>
             <Image  
               style={styles.box}
               source={require('../../res/img/circle_black.png')}

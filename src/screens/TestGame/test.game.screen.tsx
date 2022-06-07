@@ -6,7 +6,8 @@ import {
   SafeAreaView, 
   Image, 
   TouchableOpacity, 
-  Dimensions 
+  Dimensions, 
+  Easing
 } from "react-native";
 
 const { width, height } = Dimensions.get("window")
@@ -14,7 +15,7 @@ let currentCount = 0
 const circleWidth = 100
 const circleHeight = 100
 
-export const TournamentGameScreen: FC = () => {
+export const TestGameScreen: FC = () => {
 
   const [x, setX] = useState(width / 2 - circleWidth / 2)
   const [y, setY] = useState(height / 2 - circleHeight / 2)
@@ -33,6 +34,7 @@ export const TournamentGameScreen: FC = () => {
       toValue: {x: x, y: y},
       duration: 500,
       useNativeDriver: false,
+      easing: Easing.bounce,
     }).start()
   }
 

@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 const Tab = createMaterialTopTabNavigator()
 
-import { HomeScreen, UnlimitedGameScreen, TournamentGameScreen } from '../../screens'
+import { HomeScreen, UnlimitedGameScreen, TournamentGameScreen, TestGameScreen } from '../../screens'
 // import { TCommonRoutes } from '~types'
 
 export const CommonRoutes: FC = () => {
@@ -13,6 +13,11 @@ export const CommonRoutes: FC = () => {
 
   return (
     <Tab.Navigator initialRouteName="Home">
+      <Tab.Screen
+        name="Test"
+        component={TestGameScreen}
+        options={{ title: 'Tournament' }}
+      />
       <Tab.Screen
         name="Game"
         component={TournamentGameScreen}
