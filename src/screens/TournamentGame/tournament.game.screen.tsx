@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { 
   Animated, 
   Text, 
@@ -13,8 +13,36 @@ const { width, height } = Dimensions.get("window")
 let currentCount = 0
 const circleWidth = 100
 const circleHeight = 100
+let timer = () => {}
+let mustStart = true
+let isStop = false
 
 export const TournamentGameScreen: FC = () => {
+
+  const [time, setTime] = useState(10)
+  
+  const startTimer = () => {
+    timer = setTimeout(() => {
+        if(time <= 0){
+            clearTimeout(timer)
+            isStop = true
+            return false
+        }
+        setTime(time - 1)
+    }, 1000)
+ }
+
+ useEffect(() => {
+     startTimer();
+     return () => clearTimeout(timer)
+ });    
+
+  const start = () => {
+    mustStart = false
+    setTime(10)
+    startTimer()
+    clearTimeout(timer)
+  }
 
   const [x, setX] = useState(width / 2 - circleWidth / 2)
   const [y, setY] = useState(height / 2 - circleHeight / 2)
@@ -28,17 +56,25 @@ export const TournamentGameScreen: FC = () => {
   }
 
   const makeJump = () => {
-    changePosition()
-    Animated.timing(position, {
-      toValue: {x: x, y: y},
-      duration: 500,
-      useNativeDriver: false,
-    }).start()
+    if (mustStart) {
+      start()
+    } else {
+      
+    }
+    if (time !=0) {
+      changePosition()
+      Animated.timing(position, {
+        toValue: {x: x, y: y},
+        duration: 500,
+        useNativeDriver: false,
+      }).start()
+    }
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{textAlign:'center', fontSize: 40}}> { currentCount } </Text>
+      <Text style={{textAlign:'center', fontSize: 40}}> { time } </Text>
       {/* <Text style={{textAlign:'center', fontSize: 20}}> {'width: ' + width + ' height: ' + height + ' x: ' + x + ' y: ' + y} </Text> */}
       <Animated.View style={position.getLayout()}>
         <TouchableOpacity onPressIn={makeJump} activeOpacity={1}>
