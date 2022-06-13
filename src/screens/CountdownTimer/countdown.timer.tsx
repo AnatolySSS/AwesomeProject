@@ -1,26 +1,37 @@
-import { Alert } from "native-base"
-import React, { useRef, useState, useEffect, FC } from "react"
-import { Text, View } from "react-native"
+import { Center } from 'native-base'
+import React, { useState, useEffect, useRef } from 'react'
+import { View, Text, Button } from 'react-native'
 
-export const CountdownTimer: FC = () => {
-    const [time, setTime] = useState(10)
-    const timerRef = useRef(time)
+export const CountdownTimer = () => {
+  const intervalRef = useRef()
+  const [count, setCount] = useState(0)
 
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            timerRef.current -= 1;
-            if (timerRef.current < 0) {
-                clearInterval(timerId)
-            } else {
-                setTime(timerRef.current)
-            }
-        }, 1000)
-         return () => clearTimeout(timerId)
-    },[])
-
-    return(
-        <View>
-            <Text>{ time }</Text>
-        </View>
+  useEffect(() => {
+    intervalRef.current = setInterval(
+      () => setCount((count) => count + 1),
+      1000
     )
+
+    return () => {
+      clearInterval(intervalRef.current)
+    }
+  })
+
+  return (
+    <View style={{ flex: 1}}>
+      <Text style={{ fontSize: 120 }}>{count}</Text>
+      <Button
+        title="Start"
+        onPress={() => {
+          setCount(0)
+        }}
+      />
+      <Button
+        title="Stop"
+        onPress={() => {
+          clearInterval(intervalRef.current)
+        }}
+      />
+    </View>
+  )
 }
